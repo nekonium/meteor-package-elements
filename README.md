@@ -1,4 +1,4 @@
-# Ethereum elements
+# Nekonium elements
 
 A collection of basic Meteor templates/components to make dapps faster to build.
 

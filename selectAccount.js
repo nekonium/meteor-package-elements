@@ -47,7 +47,7 @@ Template['dapp_selectAccount'].helpers({
     @method (isNotEtherUnit)
     */
     'isNotEtherUnit': function() {
-        return EthTools.getUnit().toLowerCase() !== 'ether';
+        return EthTools.getUnit().toLowerCase() !== 'nuko';
     },
     /**
     Check if the current selected unit is not ether
