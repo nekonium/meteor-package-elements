@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'nekonium:elements',
+  name: 'ethereum:elements',
   summary: 'Basic elements for Dapps',
-  version: '0.7.17',
-  git: 'http://github.com/nekonium/meteor-package-elements'
+  version: '0.7.12',
+  git: 'http://github.com/ethereum/meteor-package-elements'
 });
 
 Package.onUse(function(api) {
