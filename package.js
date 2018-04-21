@@ -1,7 +1,7 @@
 Package.describe({
   name: 'nekonium:elements',
   summary: 'Basic elements for Dapps',
-  version: '0.7.12',
+  version: '0.7.18',
   git: 'http://github.com/nekonium/meteor-package-elements'
 });
 
@@ -18,8 +18,8 @@ Package.onUse(function(api) {
   api.use('3stack:bignumber@2.0.0', 'client');
   // api.use('underscorestring:underscore.string@3.1.1', 'client');
 
-  api.use('nekonium:web3@0.20.2', 'client');
-  api.use('nekonium:tools@0.4.0', 'client');
+  api.use('nekonium:web3@0.20.604', 'client');
+  api.use('nekonium:tools@0.7.1', 'client');
   api.use('frozeman:animation-helper@0.2.5', 'client');
   api.use('frozeman:storage@0.1.8', 'client');
   api.use('frozeman:template-var@1.2.2', 'client');

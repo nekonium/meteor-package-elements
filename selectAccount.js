@@ -55,6 +55,7 @@ Template['dapp_selectAccount'].helpers({
     @method (isNotEtherUnit)
     */
     'isAddress': function() {
+        var web3=nekonium.web3;        
         return web3.isAddress(TemplateVar.get('value'));
     }
 });
