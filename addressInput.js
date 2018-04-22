@@ -1,4 +1,4 @@
-
+var web3=nekonium.web3;
 /**
 Template Controllers
 
@@ -6,7 +6,6 @@ Template Controllers
 */
 
 var sha3 = function(str, opt) {
-  var web3=nekonium.web3;
   return '0x' + web3.sha3(str, opt).replace('0x', '');
 };
 
@@ -29,13 +28,12 @@ var resolverContractAbi = [{'constant': true, 'inputs': [{'name': 'interfaceID',
 var ensAddress = '0x331414dc3f6af20c74433db88ca76e2bfe5240f7';
 
 function getAddr(name, ens, callback) {
-  var web3=nekonium.web3;
   var resolverContract = web3.eth.contract(resolverContractAbi);
   
   var node = namehash(name);
   // get a resolver address for that name
   ens.resolver(node, function(err, resolverAddress) {
-    if (!err && resolverAddress != 0) {
+    if (!err && web3.isAddress(resolverAddress)) {
       // if you find one, find the addr of that resolver
       resolverContract.at(resolverAddress).addr(node, function(error, result) {
         if (!err && result != 0 && callback) {
@@ -47,13 +45,13 @@ function getAddr(name, ens, callback) {
 }
 
 function getName(address, ens, callback) {
-  var web3=nekonium.web3;
+
   var resolverContract = web3.eth.contract(resolverContractAbi);
   
   var node = namehash(address.toLowerCase().replace('0x', '') + '.addr.reverse');
   // get a resolver address for that name
   ens.resolver(node, function(err, resolverAddress) {
-    if (!err && resolverAddress != 0) {
+    if (!err && web3.isAddress(resolverAddress)) {
       // if you find one, find the name on that resolver
       resolverContract.at(resolverAddress).name(node, function(error, result) {
         if (!err && result != 0 && callback) {
@@ -73,7 +71,6 @@ The address input template, containg the identicon.
 
 Template.dapp_addressInput.onCreated(function() {
   var template = this;
-  var web3=nekonium.web3;
   // default set to true, to show no error
   TemplateVar.set('isValid', true);
   TemplateVar.set('isChecksum', true);
@@ -162,7 +159,6 @@ Template.dapp_addressInput.events({
     @event input input, change input
     */
   'input input, keyup input': function(e, template) {
-    var web3=nekonium.web3;
     
     if (!e.currentTarget.value) return;
 
@@ -184,20 +180,20 @@ Template.dapp_addressInput.events({
         TemplateVar.set('isChecksum', web3.isChecksumAddress(value));
 
         if (TemplateVar.get('ensAvailable')) {
-          var ens = TemplateVar.get('ensContract');
-
-          // if an address was added, check if there's a name associated with it
-          getName(value, ens, function(name) {
-            // Any address can claim to be any name. Double check it!
-            getAddr(name, ens, function(addr) {
-              TemplateVar.set(template, 'hasName', true);
-              TemplateVar.set(template, 'ensName', name);
-              TemplateVar.set(template, 'isValid', true);
-              TemplateVar.set(template, 'isChecksum', true);
-              TemplateVar.set(template, 'value', web3.toChecksumAddress(addr));
-              e.currentTarget.value = web3.toChecksumAddress(addr);
-            });
-          });
+          // Disable ENS
+          // var ens = TemplateVar.get('ensContract');
+          // // if an address was added, check if there's a name associated with it
+          // getName(value, ens, function(name) {
+          //   // Any address can claim to be any name. Double check it!
+          //   getAddr(name, ens, function(addr) {
+          //     TemplateVar.set(template, 'hasName', true);
+          //     TemplateVar.set(template, 'ensName', name);
+          //     TemplateVar.set(template, 'isValid', true);
+          //     TemplateVar.set(template, 'isChecksum', true);
+          //     TemplateVar.set(template, 'value', web3.toChecksumAddress(addr));
+          //     e.currentTarget.value = web3.toChecksumAddress(addr);
+          //   });
+          // });
         }
       } else {
         TemplateVar.set('value', undefined);
@@ -206,25 +202,26 @@ Template.dapp_addressInput.events({
 
       e.currentTarget.value = value;
     } else if (TemplateVar.get('ensAvailable')) {
-      if (value.slice(-4) !== '.eth') value = value + '.eth';
+
 
       TemplateVar.set('hasName', false);
       TemplateVar.set('isValid', false);
       TemplateVar.set('value', undefined);
-      var ens = TemplateVar.get('ensContract');
+      // Disable ENS
+      // var ens = TemplateVar.get('ensContract');
 
-      getAddr(value, ens, function(addr) {
-        TemplateVar.set(template, 'hasName', true);
-        TemplateVar.set(template, 'isValid', true);
-        TemplateVar.set(template, 'isChecksum', true);
-        TemplateVar.set(template, 'value', web3.toChecksumAddress(addr));
-        TemplateVar.set(template, 'ensName', value);
-        // e.currentTarget.value = web3.toChecksumAddress(addr);
-        // check name
-        getName(addr, ens, function(name) {
-          TemplateVar.set(template, 'ensName', name);
-        });
-      });
+      // getAddr(value, ens, function(addr) {
+      //   TemplateVar.set(template, 'hasName', true);
+      //   TemplateVar.set(template, 'isValid', true);
+      //   TemplateVar.set(template, 'isChecksum', true);
+      //   TemplateVar.set(template, 'value', web3.toChecksumAddress(addr));
+      //   TemplateVar.set(template, 'ensName', value);
+      //   // e.currentTarget.value = web3.toChecksumAddress(addr);
+      //   // check name
+      //   getName(addr, ens, function(name) {
+      //     TemplateVar.set(template, 'ensName', name);
+      //   });
+      // });
     }
   },
   /**

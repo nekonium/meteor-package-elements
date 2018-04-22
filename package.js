@@ -1,7 +1,7 @@
 Package.describe({
   name: 'nekonium:elements',
   summary: 'Basic elements for Dapps',
-  version: '0.7.20',
+  version: '0.7.21',
   git: 'http://github.com/nekonium/meteor-package-elements'
 });
 
