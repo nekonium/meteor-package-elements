@@ -1,8 +1,16 @@
 # Nekonium elements
+Forked from Ethereum elements.
+
+Difference from Ethereum elements.
+
+- Update web3 library to nekonium web3.
+- Change the namespace of web3 to nekonium/web3. (0.7.21)
+
+# Ethereum elements
 
 A collection of basic Meteor templates/components to make dapps faster to build.
 
-Its recommended to use these elements along with the [Ðapp styles](https://github.com/ethereum/dapp-styles).
+Its recommended to use these elements along with the [Dapp styles](https://github.com/ethereum/dapp-styles).
 
 You can find a [demo here](http://ethereum-elements.meteor.com).
 

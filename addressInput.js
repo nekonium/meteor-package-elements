@@ -1,4 +1,3 @@
-var web3=nekonium.web3;
 /**
 Template Controllers
 
@@ -6,6 +5,7 @@ Template Controllers
 */
 
 var sha3 = function(str, opt) {
+  var web3=nekonium.web3;  
   return '0x' + web3.sha3(str, opt).replace('0x', '');
 };
 
@@ -28,6 +28,7 @@ var resolverContractAbi = [{'constant': true, 'inputs': [{'name': 'interfaceID',
 var ensAddress = '0x331414dc3f6af20c74433db88ca76e2bfe5240f7';
 
 function getAddr(name, ens, callback) {
+  var web3=nekonium.web3;  
   var resolverContract = web3.eth.contract(resolverContractAbi);
   
   var node = namehash(name);
@@ -45,7 +46,7 @@ function getAddr(name, ens, callback) {
 }
 
 function getName(address, ens, callback) {
-
+  var web3=nekonium.web3;
   var resolverContract = web3.eth.contract(resolverContractAbi);
   
   var node = namehash(address.toLowerCase().replace('0x', '') + '.addr.reverse');
@@ -70,6 +71,7 @@ The address input template, containg the identicon.
 */
 
 Template.dapp_addressInput.onCreated(function() {
+  var web3=nekonium.web3;  
   var template = this;
   // default set to true, to show no error
   TemplateVar.set('isValid', true);
@@ -159,7 +161,7 @@ Template.dapp_addressInput.events({
     @event input input, change input
     */
   'input input, keyup input': function(e, template) {
-    
+    var web3=nekonium.web3;    
     if (!e.currentTarget.value) return;
 
     var value = e.currentTarget.value.replace(/[\s\*\(\)\!\?\#\$\%]+/g, '');
