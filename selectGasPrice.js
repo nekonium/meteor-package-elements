@@ -25,6 +25,7 @@ Calculates the gas * gas price.
 @return {Number}
 */
 var calculateGasInWei = function(template, gas, gasPrice, returnGasPrice){
+    var BigNumber=nekonium.BigNumber;
     // Only defaults to 20 shannon if there's no default set
     gasPrice = gasPrice || 20000000000;
 
